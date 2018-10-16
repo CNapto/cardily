@@ -30,7 +30,8 @@ const UserType = new GraphQLObjectType({
         linkedin:{type:GraphQLString},
         gplus:{type:GraphQLString},
         twitter:{type:GraphQLString},
-        github:{type:GraphQLString}
+        github:{type:GraphQLString},
+        id:{type:GraphQLString}
     })
 });
 
@@ -82,7 +83,7 @@ const mutation = new GraphQLObjectType({
                 linkedin:{type:GraphQLString},
                 gplus:{type:GraphQLString},
                 twitter:{type:GraphQLString},
-                github:{type:GraphQLString}
+                github:{type:GraphQLString},
             },
             resolve(parent,args){
                 return addUser(args)
@@ -101,7 +102,7 @@ const mutation = new GraphQLObjectType({
                 linkedin:{type:GraphQLString},
                 gplus:{type:GraphQLString},
                 twitter:{type:GraphQLString},
-                github:{type:GraphQLString}
+                github:{type:GraphQLString},
             },
             resolve(parent,args){
                 let query={};
@@ -117,6 +118,13 @@ const mutation = new GraphQLObjectType({
                 if(args.github) query.github = args.github;
 
                 return updateUser(args.id,query);
+            }
+        },
+        deleteUser:{
+            type:UserType,
+            args:{id:{type:new GraphQLNonNull(GraphQLString)}},
+            resolve(parent,args){
+                return delUser(args.id);
             }
         }
     })

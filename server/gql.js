@@ -161,6 +161,29 @@ const mutation = new GraphQLObjectType({
                     });
                 } else return null;
             }
+        },
+        delCard:{
+            type:UserType,
+            args:{
+                id:{type:new GraphQLNonNull(GraphQLString)},
+                delcard:{type:new GraphQLNonNull(GraphQLString)}
+            },
+            async resolve(parent,args){
+
+                let cards = await getUser({_id:args.id}),f=true;
+                cards = cards.cards;
+
+                for(let card of cards){
+                    if(card == args.delcard){
+                        f = !f; break;
+                    }
+                }
+                if(!f){
+                    return updateUser({_id:args.id,},{
+                        $pull:{cards:args.delcard}
+                    });
+                } else return null;
+            }
         }
     })
 })

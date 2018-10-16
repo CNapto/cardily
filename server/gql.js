@@ -2,14 +2,16 @@ const {
     GraphQLObjectType,
     GraphQLString,
     GraphQLSchema,
-    GraphQLNonNull
+    GraphQLNonNull,
+    GraphQLList
 } = require("graphql")
 
 const {
     getUser,
     updateUser,
     delUser,
-    addUser
+    addUser,
+    getAll
 } = require("./schema");
 
 
@@ -52,9 +54,9 @@ const RootQuery = new GraphQLObjectType({
             }
         },
         users:{
-            type:UserType,
+            type:new GraphQLList(UserType),
             resolve(parent,args){
-                return getUser({});
+                return getAll();
             }
         }
     })

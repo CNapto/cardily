@@ -69,3 +69,16 @@ module.exports.getUser = (query)=>{
         .catch(reject);
     });
 };
+
+
+module.exports.getAll = ()=>{
+    return new Promise((resolve,reject)=>{
+        users.find({})
+        .then((d)=>{
+            if(d.length < 1)
+                reject("No user found");
+            resolve(d);
+        })
+        .catch(reject);
+    });
+};

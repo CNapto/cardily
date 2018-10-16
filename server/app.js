@@ -19,7 +19,7 @@ mongoose.connection.once("open",()=>console.log("Connected to DB"))
 
 app.use("/graphql",gqlHTTP({
     schema:gqlSchema,
-    graphical:true
+    graphiql:true
 }));
 
 app.listen(process.env.PORT || 3000,()=>console.log("Listening...."))

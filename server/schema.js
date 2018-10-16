@@ -50,18 +50,22 @@ module.exports.delUser = (id)=>{
 
 
 module.exports.updateUser = (id,query)=>{
-    users.findOneAndUpdate({_id:id},query)
-    .then(resolve)
-    .catch(reject);
+    return new Promise((resolve,reject)=>{
+        users.findOneAndUpdate({_id:id},query)
+        .then(resolve)
+        .catch(reject);
+    });
 };
 
 
 module.exports.getUser = (query)=>{
-    users.find(query)
-    .then((d)=>{
-        if(d.length < 1)
-            reject("No user found");
-        resolve(d[0]);
-    })
-    .catch(reject);
+    return new Promise((resolve,reject)=>{
+        users.find(query)
+        .then((d)=>{
+            if(d.length < 1)
+                reject("No user found");
+            resolve(d[0]);
+        })
+        .catch(reject);
+    });
 };

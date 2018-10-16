@@ -31,7 +31,19 @@ const UserType = new GraphQLObjectType({
         gplus:{type:GraphQLString},
         twitter:{type:GraphQLString},
         github:{type:GraphQLString},
-        id:{type:GraphQLString}
+        id:{type:GraphQLString},
+        cards:{
+            type:new GraphQLList(UserType),
+            async resolve(parent,args){
+                let promises = [];
+                let data = await getUser({_id:parent.id})
+                let cards = data.cards;
+                cards.forEach((ID)=>{
+                    promises.push(getUser({_id:ID}));
+                });
+                return Promise.all(promises)
+            }
+        }
     })
 });
 

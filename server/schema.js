@@ -17,7 +17,11 @@ users = mongoose.model("user",new mongoose.Schema({
     linkedin:String,
     gplus:String,
     twitter:String,
-    github:String
+    github:String,
+    cards:{
+        type:[String],
+        default:[]
+    }
 }));
 
 

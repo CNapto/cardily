@@ -17,7 +17,11 @@ users = mongoose.model("user",new mongoose.Schema({
     linkedin:String,
     gplus:String,
     twitter:String,
-    github:String
+    github:String,
+    cards:{
+        type:[String],
+        default:[]
+    }
 }));
 
 
@@ -49,9 +53,9 @@ module.exports.delUser = (id)=>{
 
 
 
-module.exports.updateUser = (id,query)=>{
+module.exports.updateUser = (search,perform)=>{
     return new Promise((resolve,reject)=>{
-        users.findOneAndUpdate({_id:id},query)
+        users.findOneAndUpdate(search,perform)
         .then(resolve)
         .catch(reject);
     });
@@ -65,6 +69,19 @@ module.exports.getUser = (query)=>{
             if(d.length < 1)
                 reject("No user found");
             resolve(d[0]);
+        })
+        .catch(reject);
+    });
+};
+
+
+module.exports.getAll = ()=>{
+    return new Promise((resolve,reject)=>{
+        users.find({})
+        .then((d)=>{
+            if(d.length < 1)
+                reject("No user found");
+            resolve(d);
         })
         .catch(reject);
     });

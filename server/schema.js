@@ -53,9 +53,9 @@ module.exports.delUser = (id)=>{
 
 
 
-module.exports.updateUser = (id,query)=>{
+module.exports.updateUser = (search,perform)=>{
     return new Promise((resolve,reject)=>{
-        users.findOneAndUpdate({_id:id},query)
+        users.findOneAndUpdate(search,perform)
         .then(resolve)
         .catch(reject);
     });

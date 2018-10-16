@@ -129,7 +129,7 @@ const mutation = new GraphQLObjectType({
                 if(args.twitter) query.twitter = args.twitter;
                 if(args.github) query.github = args.github;
 
-                return updateUser(args.id,query);
+                return updateUser({_id:args.id},query);
             }
         },
         deleteUser:{
@@ -137,6 +137,29 @@ const mutation = new GraphQLObjectType({
             args:{id:{type:new GraphQLNonNull(GraphQLString)}},
             resolve(parent,args){
                 return delUser(args.id);
+            }
+        },
+        addCard:{
+            type:UserType,
+            args:{
+                id:{type:new GraphQLNonNull(GraphQLString)},
+                newcard:{type:new GraphQLNonNull(GraphQLString)}
+            },
+            async resolve(parent,args){
+
+                let cards = await getUser({_id:args.id}),f=true;
+                cards = cards.cards;
+
+                for(let card of cards){
+                    if(card == args.newcard){
+                        f = !f; break;
+                    }
+                }
+                if(f){
+                    return updateUser({_id:args.id,},{
+                        $push:{cards:args.newcard}
+                    });
+                } else return null;
             }
         }
     })

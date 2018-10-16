@@ -22,4 +22,8 @@ app.use("/graphql",gqlHTTP({
     graphiql:true
 }));
 
+app.get("/",(req,res,next)=>{
+    res.json({message:"Welcome, go on /graphql to get started"});
+});
+
 app.listen(process.env.PORT || 3000,()=>console.log("Listening...."))

@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "678169090854",
+    "firebase_url": "https://cardily-6c75b.firebaseio.com",
+    "project_id": "cardily-6c75b",
+    "storage_bucket": "cardily-6c75b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:678169090854:android:5af41478a583f1dc",
+        "android_client_info": {
+          "package_name": "com.cnaptosolutions.cardily"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "678169090854-u6rsh4dogft2mn5odpfuk43r6r0ec2im.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.cnaptosolutions.cardily",
+            "certificate_hash": "6af299f8b6675c1b86be8d15d3df884e26a78990"
+          }
+        },
+        {
+          "client_id": "678169090854-au4mmvurv86uaotfu64ouru2s5ih5v31.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBih_i3hkPb33PHMqpsy4DBmY-1bI2kV2o"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "678169090854-au4mmvurv86uaotfu64ouru2s5ih5v31.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -9,6 +9,7 @@ router.get("/github",passport.authenticate("github",{
 }));
 
 router.get("/github/redirect",passport.authenticate("github",{failureRedirect:"/"}),(req,res,next)=>{
+    console.log(req.data)
     res.send("Logged in")
 });
 

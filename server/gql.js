@@ -14,7 +14,7 @@ const {
     getAll
 } = require("./schema");
 
-
+const jwt = require("jsonwebtoken");
 
 
 const UserType = new GraphQLObjectType({
@@ -52,6 +52,18 @@ const UserType = new GraphQLObjectType({
 const RootQuery = new GraphQLObjectType({
     name:"RootQuery",
     fields:()=>({
+        findUser:{
+            type:UserType,
+            args:{token:{type:GraphQLString}},
+            resolve(parent,args){
+                jwt.verify(args.token,process.env.JSONSECRET,(data)=>{
+                    if(err)
+                        return "Forbidden"
+                    else
+                        getUser({_id:data.id})
+                })
+            }
+        },
         userById:{
             type:UserType,
             args:{id:{type:GraphQLString}},

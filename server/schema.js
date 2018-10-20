@@ -9,15 +9,42 @@ users = mongoose.model("user",new mongoose.Schema({
         type:String,
         required:true
     },
-    address:String,
-    image:String,
-    website:String,
-    post:String,
-    fb:String,
-    linkedin:String,
-    gplus:String,
-    twitter:String,
-    github:String,
+    address:{
+        type:String,
+        default:null
+    },
+    image:{
+        type:String,
+        default:null
+    },
+    website:{
+        type:String,
+        default:null
+    },
+    post:{
+        type:String,
+        default:null
+    },
+    fb:{
+        type:String,
+        default:null
+    },
+    linkedin:{
+        type:String,
+        default:null
+    },
+    gplus:{
+        type:String,
+        default:null
+    },
+    twitter:{
+        type:String,
+        default:null
+    },
+    github:{
+        type:String,
+        default:null
+    },
     cards:{
         type:[String],
         default:[]
@@ -86,3 +113,7 @@ module.exports.getAll = ()=>{
         .catch(reject);
     });
 };
+
+
+
+module.exports.fullUserModel = users;

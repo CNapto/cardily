@@ -1,9 +1,6 @@
 const githubStrategy = require("passport-github").Strategy;
 const passport = require("passport");
-const {
-    getUser,
-    addUser
-} = require("../schema");
+const {fullUserModel} = require("../schema");
 
 
 passport.serializeUser((user,done)=>{
@@ -23,16 +20,18 @@ passport.use(new githubStrategy({
     callbackURL:process.env.GITHUB_CALLBACK
 },(accessToken,refreshToken,profile,done)=>{
    // console.log(profile)
-    getUser({email:profile.username})
+    fullUserModel.findOne({email:profile.username})
     .then((user)=>{
         if(user)
             return done(null,user);
-        addUser({
+        let obj = new fullUserModel({
             name:profile.displayName,
             email:profile.email || profile.username,
-            image:profile.photos[0],
+            image:profile.photos[0].value,
             github:profile.profileUrl
-        }).then((u)=>{return done(null,user);console.log("added user")})
+        });
+        obj.save()
+        .then((u)=>{return done(null,user);console.log("added user")})
         .catch(console.log);
     })
 }))
